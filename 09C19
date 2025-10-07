@@ -16,7 +16,6 @@
 #define _EMA_ALPHA 1  // EMA weight of new sample (range: 0 to 1)
                           // Setting EMA to 1 effectively disables EMA filter.
 
-// ---- median filter size (set N = 3, 10, or 30 for the assignment) ----
 #define MED_N 30
 
 // global variables
