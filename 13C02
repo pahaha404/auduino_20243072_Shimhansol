@@ -1,0 +1,47 @@
+#include <Servo.h>
+
+#define PIN_SERVO 10 
+
+Servo myServo;
+
+void servo_drive_slowly(int start_angle, int end_angle, long duration_ms) {
+  int angle_range = abs(end_angle - start_angle);
+  
+  if (angle_range == 0) return; 
+  int step_delay_ms = duration_ms / angle_range;
+  int step_angle = (end_angle > start_angle) ? 1 : -1;
+
+
+  myServo.write(start_angle);
+  delay(100);
+  for (int angle = start_angle; angle != end_angle; angle += step_angle) {
+    myServo.write(angle); 
+    delay(step_delay_ms); 
+  }
+  
+ 
+  myServo.write(end_angle); 
+}
+
+void setup() {
+  myServo.attach(PIN_SERVO); 
+  
+
+  myServo.write(0);
+  delay(2000); 
+}
+
+void loop() {
+  // 1.SERVO_SPEED를 3으로 설정
+  servo_drive_slowly(0, 180, 60000); 
+  
+  delay(5000); 
+  myServo.write(0);
+  delay(2000); 
+
+  // 2._SERVO_SPEED를 0.3으로 설정
+  servo_drive_slowly(0, 90, 300000); 
+  
+  
+  while(true);
+}
